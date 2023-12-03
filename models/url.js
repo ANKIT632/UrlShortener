@@ -15,11 +15,12 @@ const urlSchema=new mongoose.Schema({
     ,
     visitHistory:[{timestamp:{type:Number}}],
 
-},{timestamp:true});
+},{timestamps:true});
 
-const URL =mongoose.model('url',urlSchema);
+const URL= mongoose.model('url',urlSchema);
 
-module.export=URL;
+module.exports= URL;
+
 
 //schema-->in model-->CURD operation.
 // model take 2 para. collection_name and schema.

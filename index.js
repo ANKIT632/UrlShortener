@@ -1,6 +1,8 @@
 const express = require('express');
 const urlrouter = require('./routes/url.js');
+const staticRouter = require('./routes/staticRoute.js');
 const { connectToMongoDB } = require('./connection.js');
+const path=require('path');
 const URL = require('./models/url.js');
 
 const PORT = 8000;
@@ -11,11 +13,26 @@ connectToMongoDB("mongodb://0.0.0.0:27017/short-url").then(() => console.log("DB
     console.error('Error connecting to mongo', err)
 });
 
+app.set("view engine","ejs");
+app.set("views",path.resolve("./views"));
+
+//parse date
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
 app.use('/url', urlrouter)
 
-app.get("/:shortId", async (req, res) => {
+// all view route are static route.
+// app.use('/',staticRoute);
+
+app.get("/test",async(req,res)=>{
+  const allUrls=await URL.find({});
+  return res.render('home',{
+    urls:allUrls,
+  });
+});
+
+app.get("/urls/:shortId", async (req, res) => {
     const shortId = req.params.shortId;
     const entry = await URL.findOneAndUpdate(
       {
@@ -31,7 +48,7 @@ app.get("/:shortId", async (req, res) => {
     );
     if(entry)
     res.redirect(entry.redirectURL);
-
+   
     else{
       res.json({status:"not valid short Id"})
     }

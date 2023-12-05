@@ -1,6 +1,8 @@
 const express = require('express');
+
 const urlrouter = require('./routes/url.js');
 const staticRouter = require('./routes/staticRoute.js');
+const userRoute=require('./routes/user.js');
 const { connectToMongoDB } = require('./connection.js');
 const path=require('path');
 const URL = require('./models/url.js');
@@ -20,10 +22,11 @@ app.set("views",path.resolve("./views"));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-app.use('/url', urlrouter)
+app.use('/url', urlrouter);
+app.use('/user',userRoute);
 
-// all view route are static route.
-// app.use('/',staticRoute);
+// all frontend route are static route.
+app.use('/',staticRouter);
 
 app.get("/test",async(req,res)=>{
   const allUrls=await URL.find({});

@@ -14,6 +14,10 @@ const urlSchema=new mongoose.Schema({
     }
     ,
     visitHistory:[{timestamp:{type:Number}}],
+    createdBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"users",
+    }
 
 },{timestamps:true});
 
@@ -24,3 +28,4 @@ module.exports= URL;
 
 //schema-->in model-->CURD operation.
 // model take 2 para. collection_name and schema.
+//   type:mongoose.Schema.type.objectId, : generate automatically id in mongodb.

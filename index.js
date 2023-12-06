@@ -3,9 +3,12 @@ const express = require('express');
 const urlrouter = require('./routes/url.js');
 const staticRouter = require('./routes/staticRoute.js');
 const userRoute=require('./routes/user.js');
+
 const { connectToMongoDB } = require('./connection.js');
 const path=require('path');
 const URL = require('./models/url.js');
+const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth");
+var cookieParser = require('cookie-parser')
 
 const PORT = 8000;
 const app = express();
@@ -20,13 +23,14 @@ app.set("views",path.resolve("./views"));
 
 //parse date
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:false}));
+app.use(cookieParser());
 
-app.use('/url', urlrouter);
+// applymiddleware only /url path ,all /url come througth middleware.
+app.use('/url', restrictToLoggedinUserOnly,urlrouter);
 app.use('/user',userRoute);
-
 // all frontend route are static route.
-app.use('/',staticRouter);
+app.use('/',checkAuth,staticRouter);
 
 app.get("/test",async(req,res)=>{
   const allUrls=await URL.find({});

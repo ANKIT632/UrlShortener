@@ -28,4 +28,5 @@ module.exports= URL;
 
 //schema-->in model-->CURD operation.
 // model take 2 para. collection_name and schema.
-//   type:mongoose.Schema.type.objectId, : generate automatically id in mongodb.
+//  type:mongoose.Schema.Types.ObjectId, : it is unique object type.
+//  ref:"users" : when get _id from add _id from user collection

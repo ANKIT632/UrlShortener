@@ -18,11 +18,11 @@ connectToMongoDB("mongodb://0.0.0.0:27017/short-url").then(() => console.log("DB
     console.error('Error connecting to mongo', err)
 });
 
-app.set("view engine","ejs");
+app.set("view engine","ejs"); 
 app.set("views",path.resolve("./views"));
 
 //parse date
-app.use(express.json());
+app.use(express.json()); 
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
@@ -41,7 +41,7 @@ app.get("/test",async(req,res)=>{
 
 app.get("/urls/:shortId", async (req, res) => {
     const shortId = req.params.shortId;
-    const entry = await URL.findOneAndUpdate(
+    const entry = await URL.findOneAndUpdate( 
       {
         shortId,
       },

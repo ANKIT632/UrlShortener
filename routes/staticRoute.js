@@ -4,9 +4,10 @@ const URL=require('../models/url.js');
 const route=express.Router();
 
 route.get("/",async(req,res)=>{
-    const allurls=await URL.find({createBy:req.user._id});
+    const allurls=await URL.find({createdBy:req.user?._id});
+    console.log("allurls",allurls);
     return res.render('home',{
-        urls:allurls,
+        urls:allurls, 
 
     });
 });

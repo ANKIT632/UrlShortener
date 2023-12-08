@@ -5,7 +5,7 @@ const route=express.Router();
 
 route.get("/",async(req,res)=>{
     const allurls=await URL.find({createdBy:req.user?._id});
-    console.log("allurls",allurls);
+  
     return res.render('home',{
         urls:allurls, 
 

@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use('/url', restrictToLoggedinUserOnly,urlrouter);
 app.use('/user',userRoute);
 // all frontend route are static route.
-app.use('/',checkAuth,staticRouter);
+app.use('/',checkAuth,staticRouter); 
 
 app.get("/test",async(req,res)=>{
   const allUrls=await URL.find({});

@@ -16,7 +16,7 @@ const urlSchema=new mongoose.Schema({
     visitHistory:[{timestamp:{type:Number}}],
     createdBy:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"users",
+       
     }
 
 },{timestamps:true});
@@ -30,3 +30,13 @@ module.exports= URL;
 // model take 2 para. collection_name and schema.
 //  type:mongoose.Schema.Types.ObjectId, : it is unique object type.
 //  ref:"users" : when get _id from add _id from user collection
+
+
+// createdBy:{
+//     type:mongoose.Schema.Types.ObjectId,
+//     ref:"users",
+// }
+
+// its means in created by we give you id and that id ref to user.
+
+// ref: This is set to "users", which specifies that the object ID stored in the createdBy field references a document in the collection named "users".

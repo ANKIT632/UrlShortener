@@ -10,7 +10,7 @@ const URL = require('./models/url.js');
 const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth");
 var cookieParser = require('cookie-parser')
 
-const PORT = 8000;
+const PORT = 3000;
 const app = express();
 
 // connect db 
@@ -38,6 +38,10 @@ app.get("/test",async(req,res)=>{
     urls:allUrls,
   });
 });
+
+app.get("*",(req,res)=>{
+   res.send("enter valid url");
+})
 
 app.get("/urls/:shortId", async (req, res) => {
     const shortId = req.params.shortId;

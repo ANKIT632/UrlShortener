@@ -17,8 +17,7 @@ async function checkAuth(req, res, next) {
 
 
   const userUid = req.cookies?.uid;
-  const user = getUser(userUid);
- console.log(user); 
+  const user = getUser(userUid); 
   req.user = user;
   next(); 
 }

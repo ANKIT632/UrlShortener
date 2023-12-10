@@ -1,1 +1,10 @@
-Note
+Note : 
+flow of Auth :
+
+app.use('/',checkAuth,staticRouter); 
+- get req with / then first checkAuth(middleware) if user are login are not Previously by session id.
+
+- if user req to login at path /login (staticRouter) --> render login page and after submit --> post req with path /user/login -->check user exist or not --> if exist then redirect to / path.
+
+esay way:
+-> /login(staticRouter) --> user/login(check in db and set session token) --> /(staticRouter)

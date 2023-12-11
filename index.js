@@ -1,11 +1,10 @@
 const express = require('express');
-
 const urlrouter = require('./routes/url.js');
 const staticRouter = require('./routes/staticRoute.js');
 const userRoute=require('./routes/user.js');
-
-const { connectToMongoDB } = require('./connection.js');
 const path=require('path');
+const { connectToMongoDB } = require('./connection.js');
+
 const URL = require('./models/url.js');
 const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth");
 var cookieParser = require('cookie-parser')

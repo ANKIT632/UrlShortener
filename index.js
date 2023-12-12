@@ -26,6 +26,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
 // applymiddleware only /url path ,all /url come througth middleware.
+// check user login or not
 app.use('/url', restrictToLoggedinUserOnly,urlrouter);
 app.use('/user',userRoute);
 // all frontend route are static route.

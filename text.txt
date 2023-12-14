@@ -7,4 +7,14 @@ app.use('/',checkAuth,staticRouter);
 - if user req to login at path /login (staticRouter) --> render login page and after submit --> post req with path /user/login -->check user exist or not --> if exist then redirect to / path.
 
 esay way:
--> /login(staticRouter) --> user/login(check in db and set session token) --> /(staticRouter)
+-> /login(staticRouter) --> user/login(check in db and set session token) --> /(staticRouter).
+ 
+
+=> Mobile based auth:
+  - it is use because cookies concept work only on web browser.
+  - there we send the token as a respose --> then client store token in user device --> then client sent req.headers["authorization"] --> here contain the "Bearer <token>" --> then get token and check user are valid or not.
+
+  - if user have a token then does not required to login again.
+  
+
+  

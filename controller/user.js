@@ -15,15 +15,17 @@ async function handleUserSignup(req, res) {
 async function handleUserLogin(req, res) { 
   const { email, password } = req.body;
   const user = await User.findOne({ email, password }); 
-
+ console.log(user);
   if (!user)
     return res.render("login", {
       error: "Invalid Username or Password",
     });
  
   const token=setUser(user);
-  res.cookie("uid",token);
-  return res.redirect("/");
+  //for web send cookies
+  // res.cookie("uid",token);
+  //for mobile application
+  return res.json({token});
 }
 
 module.exports = {

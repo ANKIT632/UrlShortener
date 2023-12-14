@@ -13,8 +13,8 @@ esay way:
 => Mobile based auth:
   - it is use because cookies concept work only on web browser.
   - there we send the token as a respose --> then client store token in user device --> then client sent req.headers["authorization"] --> here contain the "Bearer <token>" --> then get token and check user are valid or not.
-
   - if user have a token then does not required to login again.
+  - it token handle and store by user
   
 
   

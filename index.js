@@ -6,7 +6,7 @@ const path=require('path');
 const { connectToMongoDB } = require('./connection.js');
 
 const URL = require('./models/url.js');
-const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth");
+const { checkForAuthentication, restrictTo} = require("./middlewares/auth");
 var cookieParser = require('cookie-parser')
 
 const PORT = 3000;
@@ -25,12 +25,14 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
+app.use(checkForAuthentication) // check auth everytime.
+
 // applymiddleware only /url path ,all /url come througth middleware.
 // check user login or not
-app.use('/url', restrictToLoggedinUserOnly,urlrouter);
+app.use('/url',restrictTo(["NORMAL","ADMIN"]),urlrouter);
 app.use('/user',userRoute);
 // all frontend route are static route.
-app.use('/',checkAuth,staticRouter); 
+app.use('/',staticRouter); 
 
 app.get("/test",async(req,res)=>{
   const allUrls=await URL.find({});

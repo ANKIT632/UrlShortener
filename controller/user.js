@@ -22,10 +22,10 @@ async function handleUserLogin(req, res) {
     });
  
   const token=setUser(user);
-  //for web send cookies
-  // res.cookie("uid",token);
-  //for mobile application
-  return res.json({token});
+
+  res.cookie("token",token);
+
+  return res.redirect("/");
 }
 
 module.exports = {
